@@ -19,6 +19,7 @@ public class Producer implements Runnable {
         while (true) {
             String content = name + " message #" + count++;
             broker.publish(new TextMessage(content));
+            System.out.println("Producer: " + name + " published: " + content);
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {

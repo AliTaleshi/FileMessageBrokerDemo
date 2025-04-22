@@ -30,4 +30,5 @@ bin/
 .DS_Store
 
 .idea/
+data/
 FileMessageBrokerDemo.iml
