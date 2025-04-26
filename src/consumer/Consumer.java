@@ -1,6 +1,8 @@
 package consumer;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.RandomAccessFile;
 
 public class Consumer implements Runnable {
     private final File queueFile;
@@ -42,12 +44,11 @@ public class Consumer implements Runnable {
                         System.out.println(Thread.currentThread().getName() + " received: " + line);
                     }
 
+                    // TODO: File truncation can be ignored after the data is consumed(remove line 47 & 48)
                     // After consuming, truncate the file
-                    reader.setLength(0); // Clears the file
+                    reader.setLength(0);
                     lastReadPos = 0;
                 }
-
-                Thread.sleep(500); // Avoid busy spinning
             }
         } catch (Exception e) {
             System.err.println("Consumer error: " + e.getMessage());

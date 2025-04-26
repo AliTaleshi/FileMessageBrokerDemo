@@ -8,7 +8,7 @@ public class Main {
 
         // Start Consumers
         for (int i = 0; i < 3; i++) {
-            String consumerId = "consumer-" + i;
+            String consumerId = "Consumer-" + i;
             Thread consumerThread = new Thread(new Consumer(consumerId, broker), consumerId);
             consumerThread.start();
         }

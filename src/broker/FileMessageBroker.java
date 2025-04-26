@@ -5,15 +5,19 @@ import message.Message;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class FileMessageBroker {
-    private final List<String> consumerFiles = new ArrayList<>();
+    private final String[] consumerFiles = new String[10];
+    private int consumerFilesIndex = 0;
 
     public synchronized void registerConsumer(String consumerId) {
         String path = "data/" + consumerId + ".txt";
-        consumerFiles.add(path);
+
+        if (consumerFilesIndex == consumerFiles.length - 1) {
+            throw new ArrayIndexOutOfBoundsException("No more consumer files allowed to create!");
+        }
+
+        consumerFiles[consumerFilesIndex++] = path;
     }
 
     public synchronized void publish(Message message) {
