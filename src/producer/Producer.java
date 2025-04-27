@@ -16,15 +16,15 @@ public class Producer implements Runnable {
     public void run() {
         int count = 0;
 
-        while (true) {
-            String content = name + " message #" + count++;
-            broker.publish(new TextMessage(content));
-            System.out.println("Producer: " + name + " published: " + content);
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                break;
+        try {
+            while (true) {
+                String content = name + " message #" + count++;
+                broker.publish(new TextMessage(content));
+                System.out.println("Producer: " + name + " published: " + content);
+                Thread.sleep(500);
             }
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
     }
 }
