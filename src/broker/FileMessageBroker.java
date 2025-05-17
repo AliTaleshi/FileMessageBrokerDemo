@@ -57,6 +57,9 @@ public class FileMessageBroker {
         notifyAll();
     }
 
+    /** Reads all lines in a file then consumes the first line(the oldest data) and in the last stage writes back all the
+     * other lines back to the existing file
+     */
     public synchronized String consume(String consumerId) throws InterruptedException {
         int index = getConsumerIndex(consumerId);
         if (index == -1) throw new IllegalArgumentException("Unknown consumer: " + consumerId);
